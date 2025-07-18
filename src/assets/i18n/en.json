@@ -1,0 +1,16 @@
+{
+  "SETTINGS": "Settings",
+  "USERNAME": "Username",
+  "PASSWORD": "Password",
+  "CONFIRM": "Confirm Password",
+  "SAVE": "Save",
+  "LANGUAGE": "Language",
+  "DARK_MODE": "Enable Dark Mode",
+  "LOGOUT": "Logout",
+  "NAV": {
+    "SETTINGS": "Settings",
+    "PETS": "Find Pets",
+    "FAVOURITES": "My Favourites",
+    "ADOPTED": "My Adopted Pets"
+  }
+}

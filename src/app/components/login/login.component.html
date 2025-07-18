@@ -1,0 +1,89 @@
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-yellow-100 to-orange-100 px-4">
+  <div class="bg-white rounded-xl shadow-xl overflow-hidden w-full max-w-5xl flex flex-col md:flex-row">
+    
+    <!-- Left: Info & Image -->
+    <div class="hidden md:flex w-full md:w-1/2 flex-col justify-center p-8 bg-gradient-to-br from-yellow-200 to-orange-200 text-gray-800">
+      <h1 class="text-4xl font-extrabold text-orange-600">Paws</h1>
+      <h2 class="text-3xl font-bold mb-2">Connect</h2>
+      <p class="text-sm text-gray-700 mb-4">
+        Where loving hearts meet furry souls. Help rescued animals find their perfect forever homes.
+      </p>
+
+      <div class="flex items-center gap-4 text-sm mt-4 flex-wrap">
+        <span class="text-green-600 font-medium"><i class="fas fa-heart mr-1"></i> 1,000+ Happy Adoptions</span>
+        <span class="text-blue-600 font-medium"><i class="fas fa-dog mr-1"></i> 500+ Animals Waiting</span>
+      </div>
+
+      <div class="mt-6 flex gap-4">
+        <div class="text-center">
+          <i class="fas fa-dog text-2xl text-orange-600"></i>
+          <div class="text-sm font-medium">Dogs</div>
+          <div class="text-xs text-gray-600">Loyal Companions</div>
+        </div>
+        <div class="text-center">
+          <i class="fas fa-cat text-2xl text-orange-600"></i>
+          <div class="text-sm font-medium">Cats</div>
+          <div class="text-xs text-gray-600">Perfect Friends</div>
+        </div>
+        <div class="text-center">
+          <i class="fas fa-paw text-2xl text-orange-600"></i>
+          <div class="text-sm font-medium">Others</div>
+          <div class="text-xs text-gray-600">Special Pets</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Form -->
+    <div class="w-full md:w-1/2 p-8 flex flex-col justify-center">
+      <div class="text-center mb-6">
+        <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center mx-auto mb-2">
+          <i class="fas fa-heart text-orange-500 text-xl"></i>
+        </div>
+        <h2 class="text-xl font-bold">Welcome Back</h2>
+        <p class="text-sm text-gray-500">Sign in to continue helping animals find loving homes</p>
+      </div>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="space-y-4">
+        <div>
+          <label class="block text-sm text-gray-700">UserName</label>
+          <div class="relative">
+            <i class="fas fa-user absolute left-3 top-3.5 text-gray-400"></i>
+            <input
+              type="text"
+              formControlName="username"
+              placeholder="your UserName"
+              class="w-full pl-10 pr-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-sm text-gray-700">Password</label>
+          <div class="relative">
+            <i class="fas fa-lock absolute left-3 top-3.5 text-gray-400"></i>
+            <input
+              type="password"
+              formControlName="password"
+              placeholder="••••••••"
+              class="w-full pl-10 pr-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400"
+            />
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          class="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-md font-semibold transition"
+        >
+          Sign In
+        </button>
+
+        <p *ngIf="error" class="text-center text-sm text-red-500">{{ error }}</p>
+      </form>
+
+      <p class="mt-6 text-center text-sm text-gray-600">
+        Don’t have an account?
+        <button (click)="goToRegister()" class="text-orange-500 hover:underline font-medium">Sign up</button>
+      </p>
+    </div>
+  </div>
+</div>

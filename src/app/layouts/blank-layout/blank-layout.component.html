@@ -1,0 +1,15 @@
+<div class="flex h-screen w-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
+  <!-- Sidebar -->
+  <app-sidebar class="w-64"></app-sidebar>
+
+  <!-- Main Content -->
+  <div class="flex-1 flex flex-col">
+    <!-- Topbar -->
+    <app-topbar class="h-16"></app-topbar>
+
+    <!-- Main router outlet -->
+    <main class="flex-1 overflow-y-auto">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

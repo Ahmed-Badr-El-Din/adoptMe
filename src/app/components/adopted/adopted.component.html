@@ -1,0 +1,68 @@
+<!-- Loading Spinner -->
+<div *ngIf="loading(); else loaded" class="flex justify-center items-center min-h-[40vh]">
+  <div class="w-10 h-10 border-4 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
+</div>
+
+<ng-template #loaded>
+  <!-- Error Message -->
+  <div *ngIf="error()" class="text-center text-red-500 py-8">
+    <p class="text-lg font-bold">Failed to load adopted pets</p>
+    <p class="text-sm">Please check your connection and try again later.</p>
+  </div>
+
+  <!-- Pets Grid -->
+  <div *ngIf="!error() && pets().length > 0; else noPets">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4">
+      <div
+        *ngFor="let pet of pets(); let i = index"
+        [@fadeIn]
+        [style.animationDelay]="(i * 200) + 'ms'"
+        class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-4 flex flex-col items-center space-y-2 w-full max-w-xs mx-auto transition-transform hover:scale-105"
+      >
+        <!-- Image -->
+        <img *ngIf="pet.photos?.length" [src]="pet.photos[0]?.medium" alt="{{ pet.name }}" class="w-full h-40 object-cover rounded-xl" />
+
+        <!-- Pet Info -->
+        <div class="text-center">
+          <span class="text-xs uppercase tracking-wide text-orange-500 font-semibold">{{ pet.type }}</span>
+          <h3 class="text-lg font-bold mt-1">{{ pet.name }}</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-300">{{ pet.breeds?.primary }}</p>
+          <p class="text-sm text-gray-600 dark:text-gray-400">{{ pet.gender }} - {{ pet.age }}</p>
+        </div>
+
+        <!-- Remove from Adopted Button -->
+        <button
+          (click)="removeFromAdopted(pet.id)"
+          class="mt-2 px-3 py-1 text-sm rounded-full bg-red-100 text-red-600 hover:bg-red-200 transition"
+        >
+          <i class="fas fa-trash-alt mr-1"></i> Remove
+        </button>
+      </div>
+    </div>
+
+    <!-- Pagination Controls -->
+    <div class="flex justify-center items-center gap-4 mt-8">
+      <button
+        (click)="prevPage()"
+        [disabled]="currentPage() === 1"
+        class="px-4 py-1 bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600 rounded disabled:opacity-50"
+      >
+        Previous
+      </button>
+
+      <span class="text-sm text-gray-700 dark:text-gray-300">Page {{ currentPage() }}</span>
+
+      <button
+        (click)="nextPage()"
+        class="px-4 py-1 bg-orange-500 hover:bg-orange-600 text-white rounded"
+      >
+        Next
+      </button>
+    </div>
+  </div>
+
+  <!-- No Pets Fallback -->
+  <ng-template #noPets>
+    <p class="text-center text-gray-400 mt-8">No adopted pets found.</p>
+  </ng-template>
+</ng-template>
