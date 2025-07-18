@@ -25,14 +25,17 @@ import {
           [
             style({ opacity: 0, transform: 'scale(0.9)' }),
             stagger(200, [
-              animate('800ms ease-out', style({ opacity: 1, transform: 'scale(1)' }))
-            ])
+              animate(
+                '800ms ease-out',
+                style({ opacity: 1, transform: 'scale(1)' })
+              ),
+            ]),
           ],
           { optional: true }
-        )
-      ])
-    ])
-  ]
+        ),
+      ]),
+    ]),
+  ],
 })
 export class PetsComponent implements OnInit {
   pets: any[] = [];
@@ -52,30 +55,28 @@ export class PetsComponent implements OnInit {
     this.fetchPets();
   }
   clearCacheAndReload(): void {
-  this.petService.clearPetsCache();
-  this.fetchPets();
-}
+    this.petService.clearPetsCache();
+    this.fetchPets();
+  }
 
+  fetchPets(): void {
+    this.loading = true;
+    this.error = false;
 
-fetchPets(): void {
-  this.loading = true;
-  this.error = false;
-
-  this.petService.getPets({ page: this.currentPage() }).subscribe({
-    next: (res) => {
-      this.pets = res.animals || [];
-      this.loading = false;
-    },
-    error: (err) => {
-      this.loading = false;
-      this.error = true;
-    }
-  });
-}
-
+    this.petService.getPets({ page: this.currentPage() }).subscribe({
+      next: (res) => {
+        this.pets = res.animals || [];
+        this.loading = false;
+      },
+      error: (err) => {
+        this.loading = false;
+        this.error = true;
+      },
+    });
+  }
 
   filteredPets(): any[] {
-    return this.pets.filter(pet =>
+    return this.pets.filter((pet) =>
       pet.name?.toLowerCase().startsWith(this.searchText.toLowerCase())
     );
   }
@@ -97,7 +98,7 @@ fetchPets(): void {
     const current = this.favorites();
     const id = petId.toString();
     const updated = current.includes(id)
-      ? current.filter(i => i !== id)
+      ? current.filter((i) => i !== id)
       : [...current, id];
     this.favorites.set(updated);
   }
