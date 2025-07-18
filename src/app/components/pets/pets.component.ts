@@ -25,14 +25,17 @@ import {
           [
             style({ opacity: 0, transform: 'scale(0.9)' }),
             stagger(200, [
-              animate('800ms ease-out', style({ opacity: 1, transform: 'scale(1)' }))
-            ])
+              animate(
+                '800ms ease-out',
+                style({ opacity: 1, transform: 'scale(1)' })
+              ),
+            ]),
           ],
           { optional: true }
-        )
-      ])
-    ])
-  ]
+        ),
+      ]),
+    ]),
+  ],
 })
 export class PetsComponent implements OnInit {
   pets: any[] = [];
@@ -51,6 +54,10 @@ export class PetsComponent implements OnInit {
   ngOnInit(): void {
     this.fetchPets();
   }
+  clearCacheAndReload(): void {
+    this.petService.clearPetsCache();
+    this.fetchPets();
+  }
 
   fetchPets(): void {
     this.loading = true;
@@ -62,15 +69,14 @@ export class PetsComponent implements OnInit {
         this.loading = false;
       },
       error: (err) => {
-        console.error('Error fetching pets:', err);
         this.loading = false;
         this.error = true;
-      }
+      },
     });
   }
 
   filteredPets(): any[] {
-    return this.pets.filter(pet =>
+    return this.pets.filter((pet) =>
       pet.name?.toLowerCase().startsWith(this.searchText.toLowerCase())
     );
   }
@@ -92,7 +98,7 @@ export class PetsComponent implements OnInit {
     const current = this.favorites();
     const id = petId.toString();
     const updated = current.includes(id)
-      ? current.filter(i => i !== id)
+      ? current.filter((i) => i !== id)
       : [...current, id];
     this.favorites.set(updated);
   }
