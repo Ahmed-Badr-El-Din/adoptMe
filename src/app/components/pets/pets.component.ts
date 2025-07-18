@@ -51,23 +51,28 @@ export class PetsComponent implements OnInit {
   ngOnInit(): void {
     this.fetchPets();
   }
+  clearCacheAndReload(): void {
+  this.petService.clearPetsCache();
+  this.fetchPets();
+}
 
-  fetchPets(): void {
-    this.loading = true;
-    this.error = false;
 
-    this.petService.getPets({ page: this.currentPage() }).subscribe({
-      next: (res) => {
-        this.pets = res.animals || [];
-        this.loading = false;
-      },
-      error: (err) => {
-        console.error('Error fetching pets:', err);
-        this.loading = false;
-        this.error = true;
-      }
-    });
-  }
+fetchPets(): void {
+  this.loading = true;
+  this.error = false;
+
+  this.petService.getPets({ page: this.currentPage() }).subscribe({
+    next: (res) => {
+      this.pets = res.animals || [];
+      this.loading = false;
+    },
+    error: (err) => {
+      this.loading = false;
+      this.error = true;
+    }
+  });
+}
+
 
   filteredPets(): any[] {
     return this.pets.filter(pet =>
