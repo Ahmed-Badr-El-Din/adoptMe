@@ -22,5 +22,5 @@ This is an Angular application for finding, favoriting, and adopting pets. Built
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/your-username/pet-adoption-app.git
+git clone https://github.com/Ahmed-Badr-El-Din/adoptMe.git
 cd pet-adoption-app
