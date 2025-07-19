@@ -1,21 +1,20 @@
 <div class="bg-white dark:bg-gray-900 min-h-screen py-6 text-gray-900 dark:text-white">
-  <!-- Cache Clear Button -->
-  <div class="flex justify-end px-4 mb-4">
+  <!-- Search & Clear Row -->
+  <div class="flex flex-col sm:flex-row justify-between items-center gap-4 px-4 mb-6">
+    <!-- Search Bar -->
+  <input
+    [(ngModel)]="searchText"
+    placeholder="Search by name..."
+    class="w-full ml-20 sm:max-w-md px-4 py-2 rounded border bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-orange-400 transition"
+  />
+
+    <!-- Clear Cache Button -->
     <button
       (click)="clearCacheAndReload()"
-      class="text-orange-600 hover:bg-red-200 px-4 py-1 rounded text-sm font-medium transition"
+      class="text-orange-600 hover:bg-red-200 px-4 py-2 rounded text-sm font-medium transition w-full sm:w-auto"
     >
-      <i class="fas fa-sync-alt"></i>
+      <i class="fas fa-sync-alt mr-1"></i> Clear Cache
     </button>
-  </div>
-
-  <!-- Search Bar -->
-  <div class="flex justify-center mb-6 px-4">
-    <input
-      [(ngModel)]="searchText"
-      placeholder="Search by name..."
-      class="w-full max-w-md px-4 py-2 rounded border bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-white"
-    />
   </div>
 
   <!-- Loading Spinner -->
@@ -78,7 +77,10 @@
   </div>
 
   <!-- Pagination Controls -->
-  <div *ngIf="!loading && !error" class="flex justify-center items-center gap-4 mt-8">
+  <div
+    *ngIf="!loading && !error"
+    class="flex flex-col sm:flex-row justify-center sm:items-center gap-4 mt-8 px-4 text-center"
+  >
     <button
       (click)="prevPage()"
       [disabled]="currentPage() === 1"
